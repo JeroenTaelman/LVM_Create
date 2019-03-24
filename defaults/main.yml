@@ -1,0 +1,9 @@
+
+# defaults file for create_lvm_partition
+
+filesystem_type: xfs        # filesystem type
+filesystem_pv: vda2         # partition/disk for the volume group
+vg_name: vglinux            # volume group suffix
+filesystem_dump: 1          # dump frequency (see fstab)
+filesystem_passno: 2        # passno (see fstab)
+filesystem_opts: defaults   # mount options

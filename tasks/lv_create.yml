@@ -1,0 +1,33 @@
+#- name: "Fail when lv_name is not found"
+#  fail:
+#    msg: "lv_name is not defined {{lv_name}}"
+#  when: lv_name is undefined
+
+- name: Install xfs utils
+  yum: name=xfsprogs state=latest
+  when: filesystem_type == 'xfs'
+
+- name: Create logical volume
+  lvol:
+    vg: "{{vg_name}}"
+    lv: "{{lv_name}}"
+    size: "{{lv_size}}"
+
+
+- name: Format filesystem
+  filesystem:
+    fstype: "{{filesystem_type}}"
+    dev: "/dev/{{vg_name}}/{{lv_name}}"
+
+- name: Add filesystem to fstab and mount it
+  mount:
+    name: "{{filesystem_mount}}"
+    src: "/dev/{{vg_name}}/{{lv_name}}"
+    fstype: "{{filesystem_type}}"
+    opts: "{{filesystem_opts}}"
+    dump: "{{filesystem_dump | string}}"
+    passno: "{{filesystem_passno | string}}"
+    state: mounted
+
+
+

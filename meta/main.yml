@@ -1,0 +1,8 @@
+galaxy_info:
+ author: Jeroen
+ description: automatisatie van aanmaken met schijf
+ company: CCV
+ license: license (GPLv2, CC-BY, etc)
+ min_ansible_version: 2.2
+
+dependencies: []
